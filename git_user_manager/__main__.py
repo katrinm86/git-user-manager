@@ -84,7 +84,8 @@ if getlist:
 	with open(credential_path) as f:
 		f = json.loads(f.read())
 		users = [user for index, user in enumerate(f)]
-		print(f"{len(users)}", "users" if len(users) > 1 else "user", "found.", f"\n\n{"\n".join(users)}")
+		users_list = "\n".join(users)
+		print(f"{len(users)}", "users" if len(users) > 1 else "user", "found.", f"\n\n{users_list}")
 		sys.exit(0)
 
 if getuser:
