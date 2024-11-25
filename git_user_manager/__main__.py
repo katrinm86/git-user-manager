@@ -81,12 +81,15 @@ if not git.stdout:
 	sys.exit(1)
 
 if getlist:
-	with open(credential_path) as f:
-		f = json.loads(f.read())
-		users = [user for index, user in enumerate(f)]
-		users_list = "\n".join(users)
-		print(f"{len(users)}", "users" if len(users) > 1 else "user", "found.", f"\n\n{users_list}")
-		sys.exit(0)
+	try:
+		with open(credential_path) as f:
+			f = json.loads(f.read())
+			users = [user for index, user in enumerate(f)]
+	except FileNotFoundError:
+		users = []
+	users_list = "\n".join(users)
+	print(f"{len(users)}", "users" if len(users) > 1 else "user", "found.", f"\n\n{users_list}")
+	sys.exit(0)
 
 if getuser:
     if getname is None or getemail is None:
